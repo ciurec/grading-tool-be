@@ -1,5 +1,6 @@
-package com.example.grading.persistence;
+package com.example.grading.datamodel;
 
+import com.example.grading.persistence.Similarity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -7,19 +8,15 @@ import lombok.Setter;
 
 import java.util.List;
 
-@Entity
 @NoArgsConstructor
 @Getter
 @Setter
-public class Assignment {
+public class AssignmentDatamodel {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+
     private String name;
     private boolean passed;
     private int score;
 
-    @OneToMany()
-    private List<Similarity> similarities;
+    private List<SimilarityDatamodel> similarities;
 }

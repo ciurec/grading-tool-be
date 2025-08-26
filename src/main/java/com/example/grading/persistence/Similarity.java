@@ -7,6 +7,7 @@ import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Similarity {
+
     @Id
     private Long id;
     @ManyToOne

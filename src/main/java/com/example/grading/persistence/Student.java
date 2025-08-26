@@ -1,11 +1,17 @@
 package com.example.grading.persistence;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@NoArgsConstructor
+@Getter
+@Setter
 public class Student {
 
     @Id
@@ -14,13 +20,18 @@ public class Student {
 
     private String firstName;
     private String lastName;
-    private String name;
-    private Group group;
+    @Enumerated(EnumType.STRING)
+    private StudentGroup studentGroup;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @ManyToMany
+    @JoinTable(
+            name = "student_assignment",
+            joinColumns = @JoinColumn(name = "student_id"),
+            inverseJoinColumns = @JoinColumn(name = "assignment_id")
+    )
     private List<Assignment> assignments = new ArrayList<>();
-
     private int averageScore;
     private boolean passed;
+
     private String githubRepository;
 }
