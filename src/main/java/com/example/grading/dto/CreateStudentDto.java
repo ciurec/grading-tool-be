@@ -1,8 +1,6 @@
-package com.example.grading.datamodel;
+package com.example.grading.dto;
 
-import com.example.grading.persistence.Assignment;
 import com.example.grading.persistence.StudentGroup;
-import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -13,13 +11,10 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Setter
-public class StudentDatamodel {
+public class CreateStudentDto {
 
     private String firstName;
     private String lastName;
     private StudentGroup studentGroup;
-    private List<AssignmentDatamodel> assignments = new ArrayList<>();
-    private int averageScore;
-    private boolean passed;
     private String githubRepository;
 }

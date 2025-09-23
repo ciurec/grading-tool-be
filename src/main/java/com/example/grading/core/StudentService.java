@@ -1,12 +1,12 @@
 package com.example.grading.core;
 
 
-import com.example.grading.datamodel.StudentDatamodel;
+import com.example.grading.dto.CreateStudentDto;
+import com.example.grading.dto.StudentDto;
 import com.example.grading.persistence.Student;
 import com.example.grading.persistence.dao.StudentRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -18,15 +18,31 @@ public class StudentService {
         this.studentRepository = studentRepository;
     }
 
-    public List<StudentDatamodel> getAllStudents() {
+    public List<StudentDto> getAllStudents() {
         return studentRepository.findAll().stream().map(this::mapStudentToDatamodel).toList();
     }
 
-    private StudentDatamodel mapStudentToDatamodel(Student student) {
+    public StudentDto createStudent(CreateStudentDto createStudentDto) {
 
-        StudentDatamodel studentDatamodel = new StudentDatamodel();
-        studentDatamodel.setFirstName(student.getFirstName());
-        studentDatamodel.setLastName(student.getLastName());
-        return studentDatamodel;
+        Student student = mapStudentDtoToModel(createStudentDto);
+        return mapStudentToDatamodel(studentRepository.save(student));
+    }
+
+    private StudentDto mapStudentToDatamodel(Student student) {
+
+        StudentDto studentDto = new StudentDto();
+        studentDto.setFirstName(student.getFirstName());
+        studentDto.setLastName(student.getLastName());
+        return studentDto;
+    }
+
+    private Student mapStudentDtoToModel(CreateStudentDto studentDto) {
+
+        Student student = new Student();
+        student.setFirstName(studentDto.getFirstName());
+        student.setLastName(studentDto.getLastName());
+        student.setGithubRepository(studentDto.getGithubRepository());
+        student.setStudentGroup(studentDto.getStudentGroup());
+        return student;
     }
 }

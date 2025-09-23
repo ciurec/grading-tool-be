@@ -1,7 +1,6 @@
 package com.example.grading.core;
 
-import com.example.grading.datamodel.AssignmentDatamodel;
-import com.example.grading.datamodel.SimilarityDatamodel;
+import com.example.grading.dto.SimilarityDto;
 import com.example.grading.persistence.dao.SimilarityRepository;
 
 import java.util.ArrayList;
@@ -15,7 +14,7 @@ public class SimilarityService {
         this.similarityRepository = similarityRepository;
     }
 
-    public List<SimilarityDatamodel> getAllSimilaritiesByAssignment(Long assignmentId) {
+    public List<SimilarityDto> getAllSimilaritiesByAssignment(Long assignmentId) {
         return new ArrayList<>();
     }
 }

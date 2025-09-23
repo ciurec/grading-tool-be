@@ -1,7 +1,6 @@
 package com.example.grading.core;
 
-import com.example.grading.datamodel.AssignmentDatamodel;
-import com.example.grading.datamodel.StudentDatamodel;
+import com.example.grading.dto.AssignmentDto;
 import com.example.grading.persistence.dao.AssignmentRepository;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +17,7 @@ public class AssignmentService {
 
 
     }
-    public List<AssignmentDatamodel> getAllAssignements() {
+    public List<AssignmentDto> getAllAssignements() {
         return new ArrayList<>();
     }
 }
