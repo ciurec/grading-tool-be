@@ -1,7 +1,7 @@
 package com.example.grading.persistence.dao;
 
-import com.example.grading.persistence.Assignment;
+import com.example.grading.persistence.AssignmentEty;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface AssignmentRepository extends JpaRepository<Assignment, Long> {
+public interface AssignmentRepository extends JpaRepository<AssignmentEty, Long> {
 }

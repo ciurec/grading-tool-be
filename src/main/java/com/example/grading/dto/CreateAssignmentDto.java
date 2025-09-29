@@ -4,18 +4,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
-
 @NoArgsConstructor
 @Getter
 @Setter
-public class AssignmentDto {
+public class CreateAssignmentDto {
 
-
-    private String name;
-    private boolean passed;
+    private String assignementName;
     private String deadline;
-    private int score;
-
-    private List<SimilarityDto> similarities;
 }

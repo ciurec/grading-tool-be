@@ -1,4 +1,4 @@
-package com.example.grading.core;
+package com.example.grading.service;
 
 import com.example.grading.dto.SimilarityDto;
 import com.example.grading.persistence.dao.SimilarityRepository;

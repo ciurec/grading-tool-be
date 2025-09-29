@@ -29,7 +29,7 @@ public class Student {
             joinColumns = @JoinColumn(name = "student_id"),
             inverseJoinColumns = @JoinColumn(name = "assignment_id")
     )
-    private List<Assignment> assignments = new ArrayList<>();
+    private List<AssignmentEty> assignmentEties = new ArrayList<>();
     private int averageScore;
     private boolean passed;
 

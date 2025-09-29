@@ -1,6 +1,6 @@
 package com.example.grading.controller;
 
-import com.example.grading.core.StudentService;
+import com.example.grading.service.StudentService;
 import com.example.grading.dto.CreateStudentDto;
 import com.example.grading.dto.StudentDto;
 import org.springframework.http.ResponseEntity;

@@ -1,6 +1,6 @@
 package com.example.grading.utils;
 
-import com.example.grading.persistence.Assignment;
+import com.example.grading.persistence.AssignmentEty;
 import com.example.grading.persistence.StudentGroup;
 import com.example.grading.persistence.Student;
 import com.example.grading.persistence.dao.AssignmentRepository;
@@ -23,23 +23,23 @@ public class DataInitializer {
             StudentGroup studentGroup2 = StudentGroup.TWO;
 
             // Creare assignment-uri
-            Assignment assignment1 = new Assignment();
-            assignment1.setName("Lab 1");
-            Assignment assignment2 = new Assignment();
-            assignment2.setName("Lab 2");
+            AssignmentEty assignmentEty1 = new AssignmentEty();
+            assignmentEty1.setName("Lab 1");
+            AssignmentEty assignmentEty2 = new AssignmentEty();
+            assignmentEty2.setName("Lab 2");
 
-            List<Assignment> assignments = new ArrayList<>();
-            assignments.add(assignment1);
-            assignments.add(assignment2);
+            List<AssignmentEty> assignmentEties = new ArrayList<>();
+            assignmentEties.add(assignmentEty1);
+            assignmentEties.add(assignmentEty2);
 
-            List<Assignment> savedAssignments = assignmentRepository.saveAll(assignments);
+            List<AssignmentEty> savedAssignmentEties = assignmentRepository.saveAll(assignmentEties);
 
             // Creare studenți
             Student student1 = new Student();
             student1.setFirstName("John");
             student1.setLastName("Doe");
             student1.setStudentGroup(studentGroup1);
-            student1.setAssignments(savedAssignments);
+            student1.setAssignmentEties(savedAssignmentEties);
             student1.setAverageScore(88);
             student1.setPassed(true);
             student1.setGithubRepository("https://github.com/johndoe");
@@ -48,7 +48,7 @@ public class DataInitializer {
             student2.setFirstName("Jane");
             student2.setLastName("Smith");
             student2.setStudentGroup(studentGroup2);
-            student2.setAssignments(savedAssignments);
+            student2.setAssignmentEties(savedAssignmentEties);
             student2.setAverageScore(92);
             student2.setPassed(true);
             student2.setGithubRepository("https://github.com/janesmith");
