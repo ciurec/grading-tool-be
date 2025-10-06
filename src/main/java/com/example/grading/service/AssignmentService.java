@@ -31,15 +31,17 @@ public class AssignmentService {
     private AssignmentDto mapAssignmentToDto(AssignmentEty assignmentEty) {
 
         AssignmentDto assignmentDto = new AssignmentDto();
-        assignmentDto.setName(assignmentEty.getName());
-        assignmentDto.setDeadline(assignmentEty.getDeadline().toString());
+        assignmentDto.setTitle(assignmentEty.getTitle());
+        if (assignmentEty.getDeadline() != null) {
+            assignmentDto.setDeadline(assignmentEty.getDeadline().toString());
+        }
         return assignmentDto;
     }
 
     private AssignmentEty mapAssignmentDtoToModel(CreateAssignmentDto assignementDto) {
 
         AssignmentEty assignmentEty = new AssignmentEty();
-        assignmentEty.setName(assignementDto.getAssignementName());
+        assignmentEty.setTitle(assignementDto.getAssignementName());
         assignmentEty.setDeadline(LocalDate.parse(assignementDto.getDeadline()));
         return assignmentEty;
     }

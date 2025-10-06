@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -18,7 +17,7 @@ public class AssignmentEty {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
+    private String title;
     private boolean passed;
     private int score;
     private LocalDate deadline;

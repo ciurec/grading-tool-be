@@ -24,9 +24,9 @@ public class DataInitializer {
 
             // Creare assignment-uri
             AssignmentEty assignmentEty1 = new AssignmentEty();
-            assignmentEty1.setName("Lab 1");
+            assignmentEty1.setTitle("Lab 1");
             AssignmentEty assignmentEty2 = new AssignmentEty();
-            assignmentEty2.setName("Lab 2");
+            assignmentEty2.setTitle("Lab 2");
 
             List<AssignmentEty> assignmentEties = new ArrayList<>();
             assignmentEties.add(assignmentEty1);

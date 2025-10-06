@@ -12,7 +12,7 @@ import java.util.List;
 public class AssignmentDto {
 
 
-    private String name;
+    private String title;
     private boolean passed;
     private String deadline;
     private int score;
