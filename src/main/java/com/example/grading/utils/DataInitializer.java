@@ -1,10 +1,12 @@
 package com.example.grading.utils;
 
 import com.example.grading.persistence.AssignmentEty;
-import com.example.grading.persistence.StudentGroup;
+import com.example.grading.persistence.StudyGroup;
 import com.example.grading.persistence.Student;
+import com.example.grading.persistence.StudyYear;
 import com.example.grading.persistence.dao.AssignmentRepository;
 import com.example.grading.persistence.dao.StudentRepository;
+import com.example.grading.persistence.dao.StudyGroupRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,11 +18,10 @@ import java.util.List;
 public class DataInitializer {
 
     @Bean
-    public CommandLineRunner initDatabase(StudentRepository studentRepository, AssignmentRepository assignmentRepository) {
+    public CommandLineRunner initDatabase(StudentRepository studentRepository,
+                                          AssignmentRepository assignmentRepository,
+                                          StudyGroupRepository studyGroupRepository) {
         return args -> {
-            // Creare grupuri
-            StudentGroup studentGroup1 = StudentGroup.ONE;
-            StudentGroup studentGroup2 = StudentGroup.TWO;
 
             // Creare assignment-uri
             AssignmentEty assignmentEty1 = new AssignmentEty();
@@ -34,11 +35,20 @@ public class DataInitializer {
 
             List<AssignmentEty> savedAssignmentEties = assignmentRepository.saveAll(assignmentEties);
 
+            StudyGroup firstStudyGroup = new StudyGroup();
+            firstStudyGroup.setStudyYear(StudyYear.ONE);
+            firstStudyGroup.setName("A");
+            studyGroupRepository.save(firstStudyGroup);
+            StudyGroup secondStudyGroup = new StudyGroup();
+
+            secondStudyGroup.setStudyYear(StudyYear.TWO);
+            secondStudyGroup.setName("B");
+            studyGroupRepository.save(secondStudyGroup);
             // Creare studenți
             Student student1 = new Student();
             student1.setFirstName("John");
             student1.setLastName("Doe");
-            student1.setStudentGroup(studentGroup1);
+            student1.setStudyGroup(firstStudyGroup);
             student1.setAssignmentEties(savedAssignmentEties);
             student1.setAverageScore(88);
             student1.setPassed(true);
@@ -47,7 +57,7 @@ public class DataInitializer {
             Student student2 = new Student();
             student2.setFirstName("Jane");
             student2.setLastName("Smith");
-            student2.setStudentGroup(studentGroup2);
+            student2.setStudyGroup(secondStudyGroup);
             student2.setAssignmentEties(savedAssignmentEties);
             student2.setAverageScore(92);
             student2.setPassed(true);

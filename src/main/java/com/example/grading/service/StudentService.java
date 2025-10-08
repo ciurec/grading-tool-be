@@ -42,7 +42,7 @@ public class StudentService {
         student.setFirstName(studentDto.getFirstName());
         student.setLastName(studentDto.getLastName());
         student.setGithubRepository(studentDto.getGithubRepository());
-        student.setStudentGroup(studentDto.getStudentGroup());
+//        student.setStudentGroup(studentDto.getStudentGroup());
         return student;
     }
 }

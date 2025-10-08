@@ -20,8 +20,9 @@ public class Student {
 
     private String firstName;
     private String lastName;
-    @Enumerated(EnumType.STRING)
-    private StudentGroup studentGroup;
+
+    @ManyToOne
+    private StudyGroup studyGroup;
 
     @ManyToMany
     @JoinTable(
