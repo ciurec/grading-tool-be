@@ -48,9 +48,10 @@ public class DataInitializer {
             Student student1 = new Student();
             student1.setFirstName("John");
             student1.setLastName("Doe");
+            student1.setGithubRepository("https://github.com/");
             student1.setStudyGroup(firstStudyGroup);
             student1.setAssignmentEties(savedAssignmentEties);
-            student1.setAverageScore(88);
+            student1.setAverageScore(8);
             student1.setPassed(true);
             student1.setGithubRepository("https://github.com/johndoe");
 
@@ -59,7 +60,8 @@ public class DataInitializer {
             student2.setLastName("Smith");
             student2.setStudyGroup(secondStudyGroup);
             student2.setAssignmentEties(savedAssignmentEties);
-            student2.setAverageScore(92);
+            student2.setAverageScore(9);
+            student2.setGithubRepository("https://github.com/");
             student2.setPassed(true);
             student2.setGithubRepository("https://github.com/janesmith");
 

@@ -5,6 +5,7 @@ import com.example.grading.dto.CreateStudentDto;
 import com.example.grading.dto.StudentDto;
 import com.example.grading.persistence.Student;
 import com.example.grading.persistence.dao.StudentRepository;
+import com.example.grading.service.mapper.BaseDataMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -33,6 +34,10 @@ public class StudentService {
         StudentDto studentDto = new StudentDto();
         studentDto.setFirstName(student.getFirstName());
         studentDto.setLastName(student.getLastName());
+        studentDto.setGithubRepository(student.getGithubRepository());
+        studentDto.setAverageScore(student.getAverageScore());
+        studentDto.setStudyGroup(BaseDataMapper.mapStudyGroupToDto(student.getStudyGroup()));
+        studentDto.setPassed(student.isPassed());
         return studentDto;
     }
 
