@@ -10,6 +10,7 @@ public class BaseDataMapper {
     public static StudyGroupDto mapStudyGroupToDto(StudyGroup studyGroup) {
 
         StudyGroupDto studyGroupDto = new StudyGroupDto();
+        studyGroupDto.setId(studyGroup.getId());
         studyGroupDto.setName(studyGroup.getName());
         return studyGroupDto;
     }

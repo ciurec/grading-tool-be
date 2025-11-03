@@ -4,7 +4,9 @@ package com.example.grading.service;
 import com.example.grading.dto.CreateStudentDto;
 import com.example.grading.dto.StudentDto;
 import com.example.grading.persistence.Student;
+import com.example.grading.persistence.StudyGroup;
 import com.example.grading.persistence.dao.StudentRepository;
+import com.example.grading.persistence.dao.StudyGroupRepository;
 import com.example.grading.service.mapper.BaseDataMapper;
 import org.springframework.stereotype.Service;
 
@@ -14,9 +16,11 @@ import java.util.List;
 public class StudentService {
 
     private StudentRepository studentRepository;
+    private StudyGroupRepository studyGroupRepository;
 
-    public StudentService(StudentRepository studentRepository) {
+    public StudentService(StudentRepository studentRepository, StudyGroupRepository studyGroupRepository) {
         this.studentRepository = studentRepository;
+        this.studyGroupRepository = studyGroupRepository;
     }
 
     public List<StudentDto> getAllStudents() {
@@ -25,8 +29,14 @@ public class StudentService {
 
     public StudentDto createStudent(CreateStudentDto createStudentDto) {
 
-        Student student = mapStudentDtoToModel(createStudentDto);
-        return mapStudentToDatamodel(studentRepository.save(student));
+        StudyGroup studyGroup = studyGroupRepository
+                .findById(createStudentDto.getStudyGroup()).orElse(null);
+        Student newStudent = mapStudentDtoToModel(createStudentDto);
+        if (studyGroup != null) {
+            newStudent.setStudyGroup(studyGroup);
+        }
+        studentRepository.save(newStudent);
+        return mapStudentToDatamodel(newStudent);
     }
 
     private StudentDto mapStudentToDatamodel(Student student) {
@@ -47,7 +57,6 @@ public class StudentService {
         student.setFirstName(studentDto.getFirstName());
         student.setLastName(studentDto.getLastName());
         student.setGithubRepository(studentDto.getGithubRepository());
-//        student.setStudentGroup(studentDto.getStudentGroup());
         return student;
     }
 }
