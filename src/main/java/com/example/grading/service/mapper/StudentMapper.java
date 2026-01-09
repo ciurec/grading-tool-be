@@ -19,6 +19,21 @@ public class StudentMapper {
         studentDto.setEmail(student.getEmail());
         studentDto.setGithubRepository(student.getGithubRepository());
         studentDto.setAverageScore(student.getAverageScore());
+        studentDto.setStudyGroup(BaseDataMapper.mapStudyGroupToDto(student.getStudyGroup()));
+        studentDto.setPassed(student.isPassed());
+        return studentDto;
+    }
+
+    public static StudentDto mapStudentDetailsToDTO(Student student) {
+
+        StudentDto studentDto = new StudentDto();
+        studentDto.setId(student.getId());
+        studentDto.setStudentNumber(student.getStudentNumber());
+        studentDto.setFirstName(student.getFirstName());
+        studentDto.setLastName(student.getLastName());
+        studentDto.setEmail(student.getEmail());
+        studentDto.setGithubRepository(student.getGithubRepository());
+        studentDto.setAverageScore(student.getAverageScore());
 
         List<StudentAssignmentDto> studentAssignmentDtos = student.getAssignmentEties().stream().map(AssignmentMapper::mapStudentAssignmentToDto).toList();
         studentDto.setAssignments(studentAssignmentDtos);

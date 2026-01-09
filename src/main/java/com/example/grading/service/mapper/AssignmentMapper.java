@@ -17,6 +17,20 @@ public class AssignmentMapper {
         assignmentDto.setId(assignmentEty.getId());
         assignmentDto.setAssignmentNumber(assignmentEty.getAssignmentNumber());
         assignmentDto.setTitle(assignmentEty.getTitle());
+        if (assignmentEty.getDeadline() != null) {
+            assignmentDto.setDeadline(assignmentEty.getDeadline().toString());
+        }
+        assignmentDto.setGithubRepo(assignmentEty.getGithubRepo());
+        assignmentDto.setNumberOfStudents(assignmentEty.getNumberOfStudents());
+        return assignmentDto;
+    }
+
+    public static AssignmentDto mapAssignmentDetailsToDto(AssignmentEty assignmentEty) {
+
+        AssignmentDto assignmentDto = new AssignmentDto();
+        assignmentDto.setId(assignmentEty.getId());
+        assignmentDto.setAssignmentNumber(assignmentEty.getAssignmentNumber());
+        assignmentDto.setTitle(assignmentEty.getTitle());
         List<StudentAssignmentDto> studentAssignmentDtos = assignmentEty.getStudents().stream().map(AssignmentMapper::mapStudentAssignmentToDto).toList();
         assignmentDto.setStudents(studentAssignmentDtos);
         if (assignmentEty.getDeadline() != null) {
@@ -43,6 +57,7 @@ public class AssignmentMapper {
         StudentAssignmentDto studentAssignmentDto = new StudentAssignmentDto();
         studentAssignmentDto.setScore(studentAssignement.getScore());
         studentAssignmentDto.setStudentFirstName(studentAssignement.getStudent().getFirstName());
+        studentAssignmentDto.setStudentLastName(studentAssignement.getStudent().getFirstName());
         studentAssignmentDto.setGithubRepo(studentAssignement.getGithubRepo());
         studentAssignmentDto.setDeadline(studentAssignement.getAssignment().getDeadline().toString());
         studentAssignmentDto.setPassed(studentAssignement.isPassed());

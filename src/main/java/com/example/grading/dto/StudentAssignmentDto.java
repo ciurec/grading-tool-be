@@ -9,14 +9,13 @@ import java.util.List;
 @Setter
 public class StudentAssignmentDto {
 
-    private Long assignmentId;
     private Integer assignmentNumber;
+    private String studentNumber;
     private String title;
     private String deadline;
     private String githubRepo;
     private String studentFirstName;
     private String studentLastName;
-    private String studentNumber;
 
     private boolean passed;
     private int score;

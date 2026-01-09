@@ -15,8 +15,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Objects;
 
-import static com.example.grading.service.mapper.StudentMapper.mapStudentDtoToModel;
-import static com.example.grading.service.mapper.StudentMapper.mapStudentToDTO;
+import static com.example.grading.service.mapper.StudentMapper.*;
 
 @Service
 public class StudentService {
@@ -34,7 +33,7 @@ public class StudentService {
     }
 
     public StudentDto getStudentById(Long studentId) {
-        return mapStudentToDTO(Objects.requireNonNull(studentRepository.findById(studentId).orElse(null)));
+        return mapStudentDetailsToDTO(Objects.requireNonNull(studentRepository.findById(studentId).orElse(null)));
     }
 
     public StudentDto createStudent(CreateStudentDto createStudentDto) {

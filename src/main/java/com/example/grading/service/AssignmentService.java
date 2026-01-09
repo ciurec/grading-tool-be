@@ -28,7 +28,7 @@ public class AssignmentService {
     }
 
     public AssignmentDto getAssignmentById(Long assignmentId) {
-        return AssignmentMapper.mapAssignmentToDto(Objects.requireNonNull(assignmentRepository.findById(assignmentId).orElse(null)));
+        return AssignmentMapper.mapAssignmentDetailsToDto(Objects.requireNonNull(assignmentRepository.findById(assignmentId).orElse(null)));
     }
     public AssignmentDto createAssignment(CreateAssignmentDto createAssignmentDto) {
 
