@@ -11,11 +11,11 @@ import java.util.List;
 @Setter
 public class AssignmentDto {
 
-
+    private Long id;
+    private Integer assignmentNumber;
     private String title;
-    private boolean passed;
     private String deadline;
-    private int score;
-
-    private List<SimilarityDto> similarities;
+    private String githubRepo;
+    private List<StudentAssignmentDto> students;
+    private Integer numberOfStudents;
 }

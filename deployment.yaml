@@ -32,16 +32,21 @@ spec:
               value: postgres
             - name: SPRING_DATASOURCE_PASSWORD
               value: admin
-            - name: SPRING_DATASOURCE_DRIVER-CLASS-NAME
-              value: org.postgresql.Driver
             - name: SERVER_PORT
               value: "8081"
-            - name: SPRING_JPA_HIBERNATE_DDL_AUTO
-              value: create
-            - name: SPRING_JPA_SHOW_SQL
-              value: "true"
-            - name: SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT
-              value: org.hibernate.dialect.PostgreSQLDialect
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-service
+  namespace: plagiarism-app
+spec:
+  type: ClusterIP
+  selector:
+    app: plagiarism-backend
+  ports:
+    - port: 8080
+      targetPort: 8081
 ---
 # ---------------- POSTGRESQL ----------------
 apiVersion: apps/v1
@@ -91,21 +96,7 @@ spec:
     - port: 5432
       targetPort: 5432
 ---
-apiVersion: v1
-kind: Service
-metadata:
-  name: backend-service
-  namespace: plagiarism-app
-spec:
-  type: ClusterIP
-  selector:
-    app: plagiarism-backend
-  ports:
-    - port: 8080
-      targetPort: 8081
-      nodePort: 30081
----
-# ---------------- FRONTEND SERVICE ----------------
+# ---------------- FRONTEND ----------------
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -134,10 +125,35 @@ metadata:
   name: frontend-service
   namespace: plagiarism-app
 spec:
-  type: NodePort
+  type: ClusterIP
   selector:
     app: plagiarism-frontend
   ports:
     - port: 80
       targetPort: 80
-      nodePort: 30080
+---
+# ---------------- INGRESS ----------------
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: plagiarism-ingress
+  namespace: plagiarism-app
+spec:
+  rules:
+    - host: app.local
+      http:
+        paths:
+          - path: /api
+            pathType: Prefix
+            backend:
+              service:
+                name: backend-service
+                port:
+                  number: 8080
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: frontend-service
+                port:
+                  number: 80

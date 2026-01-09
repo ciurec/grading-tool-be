@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -17,11 +18,12 @@ public class AssignmentEty {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String title;
-    private boolean passed;
-    private int score;
-    private LocalDate deadline;
+    private Integer assignmentNumber;
 
-    @OneToMany()
-    private List<Similarity> similarities;
+    private String title;
+    private LocalDate deadline;
+    private String githubRepo;
+    private Integer numberOfStudents;
+    @OneToMany(mappedBy = "assignment")
+    private List<StudentAssignement> students;
 }

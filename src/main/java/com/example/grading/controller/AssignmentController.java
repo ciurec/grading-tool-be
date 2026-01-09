@@ -1,6 +1,7 @@
 package com.example.grading.controller;
 
 import com.example.grading.dto.CreateAssignmentDto;
+import com.example.grading.dto.StudentDto;
 import com.example.grading.service.AssignmentService;
 import com.example.grading.dto.AssignmentDto;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +23,11 @@ public class AssignmentController {
     public List<AssignmentDto> getAllAssignments() {
 
         return this.assignmentService.getAllAssignements();
+    }
+
+    @GetMapping("/{id}")
+    public AssignmentDto getAssignmentById(@PathVariable Long id) {
+        return this.assignmentService.getAssignmentById(id);
     }
 
     @PostMapping

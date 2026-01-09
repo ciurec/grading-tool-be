@@ -9,6 +9,10 @@ import lombok.Setter;
 @Setter
 public class CreateAssignmentDto {
 
-    private String assignementName;
+
+    private Integer assignmentNumber;
+    private String title;
     private String deadline;
+    private String githubRepo;
+    private Integer numberOfStudents;
 }

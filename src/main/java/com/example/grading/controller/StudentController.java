@@ -23,6 +23,10 @@ public class StudentController {
 
         return this.studentService.getAllStudents();
     }
+    @GetMapping("/{id}")
+    public StudentDto getStudentById(@PathVariable Long id) {
+        return this.studentService.getStudentById(id);
+    }
 
     @PostMapping
     public ResponseEntity<StudentDto> createStudent(@RequestBody CreateStudentDto studentDto) {

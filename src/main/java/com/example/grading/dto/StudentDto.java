@@ -12,10 +12,13 @@ import java.util.List;
 @Setter
 public class StudentDto {
 
+    private Long id;
+    private Integer studentNumber;
     private String firstName;
     private String lastName;
+    private String email;
     private StudyGroupDto studyGroup;
-    private List<AssignmentDto> assignments = new ArrayList<>();
+    private List<StudentAssignmentDto> assignments = new ArrayList<>();
     private int averageScore;
     private boolean passed;
     private String githubRepository;

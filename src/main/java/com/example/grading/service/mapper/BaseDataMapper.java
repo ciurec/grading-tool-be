@@ -4,6 +4,7 @@ import com.example.grading.dto.StudyGroupDto;
 import com.example.grading.persistence.StudyGroup;
 import org.springframework.stereotype.Service;
 
+
 @Service
 public class BaseDataMapper {
 

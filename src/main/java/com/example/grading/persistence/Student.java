@@ -17,20 +17,16 @@ public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    private Integer studentNumber;
     private String firstName;
     private String lastName;
+    private String email;
 
     @ManyToOne
     private StudyGroup studyGroup;
 
-    @ManyToMany
-    @JoinTable(
-            name = "student_assignment",
-            joinColumns = @JoinColumn(name = "student_id"),
-            inverseJoinColumns = @JoinColumn(name = "assignment_id")
-    )
-    private List<AssignmentEty> assignmentEties = new ArrayList<>();
+    @OneToMany(mappedBy = "student")
+    private List<StudentAssignement> assignmentEties = new ArrayList<>();
     private int averageScore;
     private boolean passed;
 

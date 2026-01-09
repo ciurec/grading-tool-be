@@ -7,16 +7,22 @@ import com.example.grading.persistence.Student;
 import com.example.grading.persistence.StudyGroup;
 import com.example.grading.persistence.dao.StudentRepository;
 import com.example.grading.persistence.dao.StudyGroupRepository;
+import com.example.grading.service.mapper.AssignmentMapper;
 import com.example.grading.service.mapper.BaseDataMapper;
+import com.example.grading.service.mapper.StudentMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
+
+import static com.example.grading.service.mapper.StudentMapper.mapStudentDtoToModel;
+import static com.example.grading.service.mapper.StudentMapper.mapStudentToDTO;
 
 @Service
 public class StudentService {
 
-    private StudentRepository studentRepository;
-    private StudyGroupRepository studyGroupRepository;
+    private final StudentRepository studentRepository;
+    private final StudyGroupRepository studyGroupRepository;
 
     public StudentService(StudentRepository studentRepository, StudyGroupRepository studyGroupRepository) {
         this.studentRepository = studentRepository;
@@ -24,7 +30,11 @@ public class StudentService {
     }
 
     public List<StudentDto> getAllStudents() {
-        return studentRepository.findAll().stream().map(this::mapStudentToDatamodel).toList();
+        return studentRepository.findAll().stream().map(StudentMapper::mapStudentToDTO).toList();
+    }
+
+    public StudentDto getStudentById(Long studentId) {
+        return mapStudentToDTO(Objects.requireNonNull(studentRepository.findById(studentId).orElse(null)));
     }
 
     public StudentDto createStudent(CreateStudentDto createStudentDto) {
@@ -36,27 +46,7 @@ public class StudentService {
             newStudent.setStudyGroup(studyGroup);
         }
         studentRepository.save(newStudent);
-        return mapStudentToDatamodel(newStudent);
+        return mapStudentToDTO(newStudent);
     }
 
-    private StudentDto mapStudentToDatamodel(Student student) {
-
-        StudentDto studentDto = new StudentDto();
-        studentDto.setFirstName(student.getFirstName());
-        studentDto.setLastName(student.getLastName());
-        studentDto.setGithubRepository(student.getGithubRepository());
-        studentDto.setAverageScore(student.getAverageScore());
-        studentDto.setStudyGroup(BaseDataMapper.mapStudyGroupToDto(student.getStudyGroup()));
-        studentDto.setPassed(student.isPassed());
-        return studentDto;
-    }
-
-    private Student mapStudentDtoToModel(CreateStudentDto studentDto) {
-
-        Student student = new Student();
-        student.setFirstName(studentDto.getFirstName());
-        student.setLastName(studentDto.getLastName());
-        student.setGithubRepository(studentDto.getGithubRepository());
-        return student;
-    }
 }
