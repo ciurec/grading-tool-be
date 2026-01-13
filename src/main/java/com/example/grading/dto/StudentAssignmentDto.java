@@ -1,5 +1,4 @@
 package com.example.grading.dto;
-import com.example.grading.persistence.Student;
 import lombok.Getter;
 import lombok.Setter;
 

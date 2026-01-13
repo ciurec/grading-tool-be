@@ -30,7 +30,13 @@ public class StudentController {
 
     @PostMapping
     public ResponseEntity<StudentDto> createStudent(@RequestBody CreateStudentDto studentDto) {
-        StudentDto createdStudent = this.studentService.createStudent(studentDto);
+        StudentDto createdStudent = this.studentService.saveStudent(studentDto);
+        return ResponseEntity.ok(createdStudent);
+    }
+
+    @PutMapping
+    public ResponseEntity<StudentDto> editStudent(@RequestBody CreateStudentDto studentDto) {
+        StudentDto createdStudent = this.studentService.saveStudent(studentDto);
         return ResponseEntity.ok(createdStudent);
     }
 }

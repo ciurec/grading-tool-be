@@ -7,8 +7,6 @@ import com.example.grading.persistence.Student;
 import com.example.grading.persistence.StudyGroup;
 import com.example.grading.persistence.dao.StudentRepository;
 import com.example.grading.persistence.dao.StudyGroupRepository;
-import com.example.grading.service.mapper.AssignmentMapper;
-import com.example.grading.service.mapper.BaseDataMapper;
 import com.example.grading.service.mapper.StudentMapper;
 import org.springframework.stereotype.Service;
 
@@ -36,7 +34,7 @@ public class StudentService {
         return mapStudentDetailsToDTO(Objects.requireNonNull(studentRepository.findById(studentId).orElse(null)));
     }
 
-    public StudentDto createStudent(CreateStudentDto createStudentDto) {
+    public StudentDto saveStudent(CreateStudentDto createStudentDto) {
 
         StudyGroup studyGroup = studyGroupRepository
                 .findById(createStudentDto.getStudyGroup()).orElse(null);
