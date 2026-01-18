@@ -55,12 +55,12 @@ public class AssignmentMapper {
     public static StudentAssignmentDto mapStudentAssignmentToDto(StudentAssignement studentAssignement) {
 
         StudentAssignmentDto studentAssignmentDto = new StudentAssignmentDto();
-        studentAssignmentDto.setScore(studentAssignement.getScore());
+        studentAssignmentDto.setGrade(studentAssignement.getScore());
         studentAssignmentDto.setStudentFirstName(studentAssignement.getStudent().getFirstName());
         studentAssignmentDto.setStudentLastName(studentAssignement.getStudent().getFirstName());
         studentAssignmentDto.setGithubRepo(studentAssignement.getGithubRepo());
         studentAssignmentDto.setDeadline(studentAssignement.getAssignment().getDeadline().toString());
-        studentAssignmentDto.setPassed(studentAssignement.isPassed());
+        studentAssignmentDto.setAssignmentStatus(studentAssignement.getStudent().getAssignmentStatus());
         studentAssignmentDto.setTitle(studentAssignement.getAssignment().getTitle());
         studentAssignmentDto.setAssignmentNumber(studentAssignement.getAssignment().getAssignmentNumber());
 

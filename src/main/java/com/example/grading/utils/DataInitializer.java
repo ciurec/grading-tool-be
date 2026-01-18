@@ -1,11 +1,12 @@
 package com.example.grading.utils;
 
+import com.example.grading.common.AssignmentStatus;
+import com.example.grading.common.StudyYear;
 import com.example.grading.persistence.*;
 import com.example.grading.persistence.dao.AssignmentRepository;
 import com.example.grading.persistence.dao.StudentAssignmentRepository;
 import com.example.grading.persistence.dao.StudentRepository;
 import com.example.grading.persistence.dao.StudyGroupRepository;
-import org.hibernate.type.descriptor.DateTimeUtils;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -61,7 +62,7 @@ public class DataInitializer {
             student1.setGithubRepository("https://github.com/");
             student1.setStudyGroup(firstStudyGroup);
             student1.setAverageScore(8);
-            student1.setPassed(true);
+            student1.setAssignmentStatus(AssignmentStatus.ASSIGNED);
             student1.setGithubRepository("https://github.com/johndoe");
 
             Student student2 = new Student();
@@ -72,7 +73,7 @@ public class DataInitializer {
             student2.setStudyGroup(secondStudyGroup);
             student2.setAverageScore(9);
             student2.setGithubRepository("https://github.com/");
-            student2.setPassed(true);
+            student2.setAssignmentStatus(AssignmentStatus.ASSIGNED);
             student2.setGithubRepository("https://github.com/janesmith");
 
             studentRepository.save(student1);

@@ -1,5 +1,6 @@
 package com.example.grading.persistence;
 
+import com.example.grading.common.StudyYear;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;

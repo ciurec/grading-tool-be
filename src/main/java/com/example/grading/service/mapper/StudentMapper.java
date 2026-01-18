@@ -20,7 +20,6 @@ public class StudentMapper {
         studentDto.setGithubRepository(student.getGithubRepository());
         studentDto.setAverageScore(student.getAverageScore());
         studentDto.setStudyGroup(BaseDataMapper.mapStudyGroupToDto(student.getStudyGroup()));
-        studentDto.setPassed(student.isPassed());
         return studentDto;
     }
 
@@ -39,7 +38,6 @@ public class StudentMapper {
         studentDto.setAssignments(studentAssignmentDtos);
 
         studentDto.setStudyGroup(BaseDataMapper.mapStudyGroupToDto(student.getStudyGroup()));
-        studentDto.setPassed(student.isPassed());
         return studentDto;
     }
 

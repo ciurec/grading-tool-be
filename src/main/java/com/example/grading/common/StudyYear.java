@@ -1,4 +1,4 @@
-package com.example.grading.persistence;
+package com.example.grading.common;
 
 public enum StudyYear {
     ONE,

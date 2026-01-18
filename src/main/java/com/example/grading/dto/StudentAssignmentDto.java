@@ -1,4 +1,7 @@
 package com.example.grading.dto;
+import com.example.grading.common.AssignmentStatus;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,8 +19,9 @@ public class StudentAssignmentDto {
     private String studentFirstName;
     private String studentLastName;
 
-    private boolean passed;
-    private int score;
+    @Enumerated(EnumType.STRING)
+    private AssignmentStatus assignmentStatus;
+    private int grade;
 
     private List<SimilarityDto> similarities;
 }

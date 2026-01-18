@@ -9,7 +9,6 @@ import lombok.Setter;
 @Setter
 public class CreateAssignmentDto {
 
-
     private Integer assignmentNumber;
     private String title;
     private String deadline;

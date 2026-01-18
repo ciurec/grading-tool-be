@@ -1,5 +1,6 @@
 package com.example.grading.persistence;
 
+import com.example.grading.common.AssignmentStatus;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,10 +26,10 @@ public class Student {
     @ManyToOne
     private StudyGroup studyGroup;
 
-    @OneToMany(mappedBy = "student")
+    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
     private List<StudentAssignement> assignmentEties = new ArrayList<>();
     private int averageScore;
-    private boolean passed;
-
+    @Enumerated(EnumType.STRING)
+    private AssignmentStatus assignmentStatus = AssignmentStatus.NEW;
     private String githubRepository;
 }

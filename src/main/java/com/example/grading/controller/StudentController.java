@@ -1,5 +1,6 @@
 package com.example.grading.controller;
 
+import com.example.grading.dto.AddAssignmentDto;
 import com.example.grading.service.StudentService;
 import com.example.grading.dto.CreateStudentDto;
 import com.example.grading.dto.StudentDto;
@@ -38,5 +39,12 @@ public class StudentController {
     public ResponseEntity<StudentDto> editStudent(@RequestBody CreateStudentDto studentDto) {
         StudentDto createdStudent = this.studentService.saveStudent(studentDto);
         return ResponseEntity.ok(createdStudent);
+    }
+
+
+    @PutMapping("/addAssignments")
+    public void addAssignments(@RequestBody AddAssignmentDto assignmentDto) {
+        this.studentService.addAssignment(assignmentDto);
+
     }
 }
