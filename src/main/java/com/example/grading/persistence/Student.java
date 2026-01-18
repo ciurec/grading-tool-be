@@ -26,7 +26,7 @@ public class Student {
     @ManyToOne
     private StudyGroup studyGroup;
 
-    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<StudentAssignement> assignmentEties = new ArrayList<>();
     private int averageScore;
     @Enumerated(EnumType.STRING)

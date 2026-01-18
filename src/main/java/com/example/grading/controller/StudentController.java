@@ -44,7 +44,7 @@ public class StudentController {
 
     @PutMapping("/addAssignments")
     public void addAssignments(@RequestBody AddAssignmentDto assignmentDto) {
-        this.studentService.addAssignment(assignmentDto);
+        this.studentService.syncAssignment(assignmentDto);
 
     }
 }

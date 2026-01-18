@@ -12,11 +12,14 @@ import com.example.grading.persistence.dao.AssignmentRepository;
 import com.example.grading.persistence.dao.StudentRepository;
 import com.example.grading.persistence.dao.StudyGroupRepository;
 import com.example.grading.service.mapper.StudentMapper;
-import org.hibernate.sql.ast.tree.update.Assignment;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import static com.example.grading.service.mapper.StudentMapper.*;
 
@@ -53,27 +56,34 @@ public class StudentService {
         return mapStudentToDTO(newStudent);
     }
 
-    public void addAssignment(AddAssignmentDto assignmentDto) {
+    @Transactional
+    public void syncAssignment(AddAssignmentDto assignmentDto) {
+
         Student student = studentRepository.findById(assignmentDto.getStudentId())
                 .orElseThrow(() -> new RuntimeException("Student not found"));
 
-        List<AssignmentEty> assignmentsToAdd =
-                assignmentRepository.findAllById(assignmentDto.getAssignmentIds());
+        // IDs dorite (din request)
+        Set<Long> desiredIds = new HashSet<>(assignmentDto.getAssignmentIds());
+
+        // 1) ȘTERGE: tot ce există în DB dar nu e în input
+        student.getAssignmentEties().removeIf(sa ->
+                sa.getAssignment() != null && !desiredIds.contains(sa.getAssignment().getId())
+        );
+
+        // 2) ADAUGĂ: doar cele noi
+        Set<Long> existingIds = student.getAssignmentEties().stream()
+                .map(sa -> sa.getAssignment().getId())
+                .collect(Collectors.toSet());
+
+        List<AssignmentEty> assignmentsToAdd = assignmentRepository.findAllById(desiredIds);
 
         for (AssignmentEty a : assignmentsToAdd) {
-
-            boolean alreadyAssigned = student.getAssignmentEties().stream()
-                    .anyMatch(sa -> sa.getAssignment().getId().equals(a.getId()));
-
-            if (alreadyAssigned) {
-                continue;
-            }
+            if (existingIds.contains(a.getId())) continue;
 
             StudentAssignement sa = new StudentAssignement();
             sa.setStudent(student);
             sa.setAssignment(a);
 
-            // default-uri
             sa.setPassed(false);
             sa.setScore(0);
             sa.setGithubRepo("test");
@@ -83,5 +93,4 @@ public class StudentService {
 
         studentRepository.save(student);
     }
-
 }
