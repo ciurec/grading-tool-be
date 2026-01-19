@@ -1,7 +1,7 @@
 package com.example.grading.service;
 
 
-import com.example.grading.dto.AddAssignmentDto;
+import com.example.grading.dto.SyncAssignmentDto;
 import com.example.grading.dto.CreateStudentDto;
 import com.example.grading.dto.StudentDto;
 import com.example.grading.persistence.AssignmentEty;
@@ -57,7 +57,7 @@ public class StudentService {
     }
 
     @Transactional
-    public void syncAssignment(AddAssignmentDto assignmentDto) {
+    public void syncAssignment(SyncAssignmentDto assignmentDto) {
 
         Student student = studentRepository.findById(assignmentDto.getStudentId())
                 .orElseThrow(() -> new RuntimeException("Student not found"));
@@ -93,4 +93,20 @@ public class StudentService {
 
         studentRepository.save(student);
     }
+
+    @Transactional
+    public void unassignAssignments(SyncAssignmentDto dto) {
+        Student student = studentRepository.findById(dto.getStudentId())
+                .orElseThrow(() -> new RuntimeException("Student not found"));
+
+        Set<Long> idsToUnassign = new HashSet<>(dto.getAssignmentIds());
+
+        List<StudentAssignement> toRemove = student.getAssignmentEties().stream()
+                .filter(sa -> sa.getAssignment() != null && idsToUnassign.contains(sa.getAssignment().getId()))
+                .toList();
+
+        toRemove.forEach(student::removeAssignmentLink);
+    }
+
+
 }

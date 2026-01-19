@@ -8,7 +8,7 @@ import java.util.List;
 
 @Getter
 @Setter
-public class AddAssignmentDto {
+public class SyncAssignmentDto {
 
     private Long studentId;
     private List<Long> assignmentIds = new ArrayList<>();

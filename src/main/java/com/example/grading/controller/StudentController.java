@@ -1,6 +1,6 @@
 package com.example.grading.controller;
 
-import com.example.grading.dto.AddAssignmentDto;
+import com.example.grading.dto.SyncAssignmentDto;
 import com.example.grading.service.StudentService;
 import com.example.grading.dto.CreateStudentDto;
 import com.example.grading.dto.StudentDto;
@@ -24,6 +24,7 @@ public class StudentController {
 
         return this.studentService.getAllStudents();
     }
+
     @GetMapping("/{id}")
     public StudentDto getStudentById(@PathVariable Long id) {
         return this.studentService.getStudentById(id);
@@ -43,8 +44,14 @@ public class StudentController {
 
 
     @PutMapping("/addAssignments")
-    public void addAssignments(@RequestBody AddAssignmentDto assignmentDto) {
+    public void addAssignments(@RequestBody SyncAssignmentDto assignmentDto) {
         this.studentService.syncAssignment(assignmentDto);
+
+    }
+
+    @PutMapping("/unassign")
+    public void unassignAssignments(@RequestBody SyncAssignmentDto assignmentDto) {
+        this.studentService.unassignAssignments(assignmentDto);
 
     }
 }

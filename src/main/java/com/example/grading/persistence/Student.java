@@ -32,4 +32,10 @@ public class Student {
     @Enumerated(EnumType.STRING)
     private AssignmentStatus assignmentStatus = AssignmentStatus.NEW;
     private String githubRepository;
+
+    public void removeAssignmentLink(StudentAssignement sa) {
+        assignmentEties.remove(sa);
+        sa.setStudent(null);
+        sa.setAssignment(null);
+    }
 }

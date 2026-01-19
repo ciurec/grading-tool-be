@@ -56,6 +56,8 @@ public class AssignmentMapper {
 
         StudentAssignmentDto studentAssignmentDto = new StudentAssignmentDto();
         studentAssignmentDto.setGrade(studentAssignement.getScore());
+        studentAssignmentDto.setAssignmentId(studentAssignement.getAssignment().getId());
+        studentAssignmentDto.setStudentId(studentAssignement.getStudent().getId());
         studentAssignmentDto.setStudentFirstName(studentAssignement.getStudent().getFirstName());
         studentAssignmentDto.setStudentLastName(studentAssignement.getStudent().getFirstName());
         studentAssignmentDto.setGithubRepo(studentAssignement.getGithubRepo());

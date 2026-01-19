@@ -11,6 +11,8 @@ import java.util.List;
 @Setter
 public class StudentAssignmentDto {
 
+    private Long assignmentId;
+    private Long studentId;
     private Integer assignmentNumber;
     private String studentNumber;
     private String title;
