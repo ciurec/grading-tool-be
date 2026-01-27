@@ -1,6 +1,8 @@
 package com.example.grading.service;
 
 
+import com.example.grading.common.AssignmentStatus;
+import com.example.grading.dto.StudentAssignmentDto;
 import com.example.grading.dto.SyncAssignmentDto;
 import com.example.grading.dto.CreateStudentDto;
 import com.example.grading.dto.StudentDto;
@@ -9,9 +11,11 @@ import com.example.grading.persistence.Student;
 import com.example.grading.persistence.StudentAssignement;
 import com.example.grading.persistence.StudyGroup;
 import com.example.grading.persistence.dao.AssignmentRepository;
+import com.example.grading.persistence.dao.StudentAssignmentRepository;
 import com.example.grading.persistence.dao.StudentRepository;
 import com.example.grading.persistence.dao.StudyGroupRepository;
 import com.example.grading.service.mapper.StudentMapper;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -29,11 +33,13 @@ public class StudentService {
     private final StudentRepository studentRepository;
     private final AssignmentRepository assignmentRepository;
     private final StudyGroupRepository studyGroupRepository;
+    private final StudentAssignmentRepository studentAssignmentRepository;
 
-    public StudentService(StudentRepository studentRepository, AssignmentRepository assignmentRepository, StudyGroupRepository studyGroupRepository) {
+    public StudentService(StudentRepository studentRepository, AssignmentRepository assignmentRepository, StudyGroupRepository studyGroupRepository, StudentAssignmentRepository studentAssignmentRepository) {
         this.studentRepository = studentRepository;
         this.assignmentRepository = assignmentRepository;
         this.studyGroupRepository = studyGroupRepository;
+        this.studentAssignmentRepository = studentAssignmentRepository;
     }
 
     public List<StudentDto> getAllStudents() {
@@ -85,7 +91,7 @@ public class StudentService {
             sa.setAssignment(a);
 
             sa.setPassed(false);
-            sa.setScore(0);
+            sa.setGrade(0);
             sa.setGithubRepo("test");
 
             student.getAssignmentEties().add(sa);
@@ -106,6 +112,36 @@ public class StudentService {
                 .toList();
 
         toRemove.forEach(student::removeAssignmentLink);
+    }
+
+    @Transactional
+    public void gradeStudent(StudentAssignmentDto studentAssignmentDto) {
+
+
+        if (studentAssignmentDto.getAssignmentId() == null) {
+            throw new IllegalArgumentException("assignmentId este obligatoriu");
+        }
+        if (studentAssignmentDto.getStudentId() == null) {
+            throw new IllegalArgumentException("studentId este obligatoriu");
+        }
+
+        StudentAssignement sa = studentAssignmentRepository
+                .findByStudentIdAndAssignmentId(studentAssignmentDto.getStudentId(),studentAssignmentDto.getAssignmentId())
+                .orElseThrow(() -> new EntityNotFoundException(
+                        "Nu există înregistrare StudentAssignment pentru assignmentId=" + studentAssignmentDto.getAssignmentId()
+                                + " și studentId=" + studentAssignmentDto.getStudentId()
+                ));
+
+
+        sa.setGrade(studentAssignmentDto.getGrade());
+
+        AssignmentStatus newStatus = studentAssignmentDto.getAssignmentStatus();
+        if (newStatus == null) {
+            newStatus = (studentAssignmentDto.getGrade() >= 5) ? AssignmentStatus.COMPLETED : AssignmentStatus.FAILED;
+        }
+        sa.setStatus(newStatus);
+
+        studentAssignmentRepository.save(sa);
     }
 
 

@@ -29,8 +29,7 @@ public class Student {
     @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<StudentAssignement> assignmentEties = new ArrayList<>();
     private int averageScore;
-    @Enumerated(EnumType.STRING)
-    private AssignmentStatus assignmentStatus = AssignmentStatus.NEW;
+
     private String githubRepository;
 
     public void removeAssignmentLink(StudentAssignement sa) {

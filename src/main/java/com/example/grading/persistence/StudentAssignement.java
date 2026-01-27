@@ -1,9 +1,9 @@
 package com.example.grading.persistence;
 
+import com.example.grading.common.AssignmentStatus;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.sql.ast.tree.update.Assignment;
 
 import java.util.List;
 
@@ -27,8 +27,11 @@ public class StudentAssignement {
     private AssignmentEty assignment;
 
     private boolean passed;
-    private int score;
+    private int grade;
     private String githubRepo;
+
+    @Enumerated(EnumType.STRING)
+    private AssignmentStatus status;
 
     @OneToMany()
     private List<Similarity> similarities;

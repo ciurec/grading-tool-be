@@ -62,7 +62,6 @@ public class DataInitializer {
             student1.setGithubRepository("https://github.com/");
             student1.setStudyGroup(firstStudyGroup);
             student1.setAverageScore(8);
-            student1.setAssignmentStatus(AssignmentStatus.ASSIGNED);
             student1.setGithubRepository("https://github.com/johndoe");
 
             Student student2 = new Student();
@@ -73,7 +72,6 @@ public class DataInitializer {
             student2.setStudyGroup(secondStudyGroup);
             student2.setAverageScore(9);
             student2.setGithubRepository("https://github.com/");
-            student2.setAssignmentStatus(AssignmentStatus.ASSIGNED);
             student2.setGithubRepository("https://github.com/janesmith");
 
             studentRepository.save(student1);
@@ -81,16 +79,18 @@ public class DataInitializer {
 
             StudentAssignement studentAssignement1 = new StudentAssignement();
             studentAssignement1.setGithubRepo("Test X");
-            studentAssignement1.setScore(10);
+            studentAssignement1.setGrade(10);
             studentAssignement1.setPassed(true);
+            studentAssignement1.setStatus(AssignmentStatus.ASSIGNED);
             studentAssignement1.setAssignment(assignmentEty1);
             studentAssignement1.setStudent(student1);
             studentAssignmentRepository.save(studentAssignement1);
 
             StudentAssignement studentAssignement2 = new StudentAssignement();
             studentAssignement2.setGithubRepo("Test y");
-            studentAssignement2.setScore(4);
+            studentAssignement2.setGrade(4);
             studentAssignement2.setPassed(true);
+            studentAssignement2.setStatus(AssignmentStatus.ASSIGNED);
             studentAssignement2.setAssignment(assignmentEty2);
             studentAssignement2.setStudent(student2);
             studentAssignmentRepository.save(studentAssignement2);

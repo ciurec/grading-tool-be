@@ -21,7 +21,6 @@ public class StudentAssignmentDto {
     private String studentFirstName;
     private String studentLastName;
 
-    @Enumerated(EnumType.STRING)
     private AssignmentStatus assignmentStatus;
     private int grade;
 
