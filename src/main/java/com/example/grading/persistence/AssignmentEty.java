@@ -24,6 +24,6 @@ public class AssignmentEty {
     private LocalDate deadline;
     private String githubRepo;
     private Integer numberOfStudents;
-    @OneToMany(mappedBy = "assignment")
+    @OneToMany(mappedBy = "assignment", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<StudentAssignement> students;
 }
